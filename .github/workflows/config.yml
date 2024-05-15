@@ -1,6 +1,8 @@
 name: Run Cypress
 
 on: [push]
+env:
+  CYPRESS_MAILSLURP_API_KEY: ${{secrets.CYPRESS_MAILSLURP_API_KEY}}
 
 jobs:
   cypress-run:
@@ -10,8 +12,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Cypress Execution
-      uses: cypress-io/github-action@v6
-      env:
-        CYPRESS_MAILSLURP_API_KEY: ${{secrets.CYPRESS_MAILSLURP_API_KEY}}
+    #- name: Cypress Execution
+      #uses: cypress-io/github-action@v6
+      #env:
+      #  CYPRESS_MAILSLURP_API_KEY: ${{secrets.CYPRESS_MAILSLURP_API_KEY}}
+    - run: npm i 
     - run: npx browserstack-cypress run

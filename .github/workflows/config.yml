@@ -1,6 +1,8 @@
 name: Run Cypress
 
 on: [push]
+# seting up a system level (global) variable is necessary as Github Actions 
+# does not have access to the environment variables set in steps for browserstack
 env:
   CYPRESS_MAILSLURP_API_KEY: ${{secrets.CYPRESS_MAILSLURP_API_KEY}}
 
@@ -16,6 +18,7 @@ jobs:
       uses: cypress-io/github-action@v6
       env:
         CYPRESS_MAILSLURP_API_KEY: ${{env.CYPRESS_MAILSLURP_API_KEY}}
+    # This is commented out because i have used up my browserstack automate minutes    
     #- name: 'BrowserStack Env Setup'
       #uses: 'browserstack/github-actions/setup-env@master'
       #with:

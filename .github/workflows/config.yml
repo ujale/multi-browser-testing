@@ -5,6 +5,7 @@ on: [push]
 # does not have access to the environment variables set in steps for browserstack
 env:
   CYPRESS_MAILSLURP_API_KEY: ${{secrets.CYPRESS_MAILSLURP_API_KEY}}
+  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
 jobs:
   cypress-run:
@@ -16,8 +17,11 @@ jobs:
 
     - name: Cypress Execution
       uses: cypress-io/github-action@v6
+      with:
+        record: true
       env:
         CYPRESS_MAILSLURP_API_KEY: ${{env.CYPRESS_MAILSLURP_API_KEY}}
+        CYPRESS_RECORD_KEY: ${{ env.CYPRESS_RECORD_KEY }}
     # This is commented out because i have used up my browserstack automate minutes    
     #- name: 'BrowserStack Env Setup'
       #uses: 'browserstack/github-actions/setup-env@master'
